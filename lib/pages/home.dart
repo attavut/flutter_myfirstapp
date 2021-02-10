@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myfirstapp/pages/photo.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,6 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<StatefulWidget> {
   String msg;
   TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +47,7 @@ class _HomePageState extends State<StatefulWidget> {
                     textAlign: TextAlign.center,
                     obscureText: true,
                     decoration: InputDecoration(labelText: 'Pasword'),
+                    controller: _passwordController,
                   ),
                 ),
                 Row(
@@ -59,8 +60,10 @@ class _HomePageState extends State<StatefulWidget> {
                         msg = _usernameController.text;
                         setState(() {});
 
-                        Navigator.pushNamed(context, '/photo-page',
-                            arguments: _usernameController.text);
+                        Navigator.pushNamed(context, '/photo-page', arguments: [
+                          _usernameController.text,
+                          _passwordController.text
+                        ]);
                       },
                     ),
                     RaisedButton(
