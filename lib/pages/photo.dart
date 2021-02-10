@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myfirstapp/models/login.dart';
+import 'package:flutter/services.dart';
+import 'package:myfirstapp/models/photo.dart';
 
 class PhotoPage extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class PhotoPage extends StatefulWidget {
 
 class _PhotoPageState extends State<StatefulWidget> {
   var user = {};
+  List<Photo> photos;
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +25,41 @@ class _PhotoPageState extends State<StatefulWidget> {
         appBar: AppBar(
           title: Text('Photo show'),
         ),
-        body: Column(
+        body: ListView(
           children: [
-            RaisedButton(
-                child: Text('Load Data'),
-                onPressed: () {
-                  var login = Login();
-                  login.username = args[0];
-                  login.password = args[1];
-                  print(login);
-                  String loginJsonStr = loginToJson(login);
-                  print(loginJsonStr);
-                }),
+            Row(
+              children: [
+                RaisedButton(
+                    child: Text('Load Data'),
+                    onPressed: () {
+                      Future<String> photoJson =
+                          rootBundle.loadString('json/photos.json');
+                      photoJson.then((value) {
+                        photos = photoFromJson(value);
+                        print(photos.length);
+                      });
+                    }),
+                RaisedButton(
+                    child: Text('Show Data'),
+                    onPressed: () {
+                      setState(() {});
+                    }),
+              ],
+            ),
+            (photos != null)
+                ? Column(
+                    children: photos.getRange(0, 100).map((photo) {
+                      return Card(
+                        child: ListTile(
+                            title: Text(photo.title),
+                            leading: Image.network(
+                              photo.thumbnailUrl,
+                              width: 50,
+                            )),
+                      );
+                    }).toList(),
+                  )
+                : Container()
           ],
         ));
   }
