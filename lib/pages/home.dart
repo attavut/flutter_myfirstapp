@@ -9,6 +9,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<StatefulWidget> {
+  String msg;
+  TextEditingController _usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +36,7 @@ class _HomePageState extends State<StatefulWidget> {
                     style: Theme.of(context).textTheme.headline5,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(labelText: 'Username'),
+                    controller: _usernameController,
                   ),
                 ),
                 Padding(
@@ -51,6 +55,8 @@ class _HomePageState extends State<StatefulWidget> {
                       child: Text("Login"),
                       onPressed: () {
                         print('This is Login button');
+                        msg = _usernameController.text;
+                        setState(() {});
                       },
                     ),
                     RaisedButton(
@@ -62,6 +68,7 @@ class _HomePageState extends State<StatefulWidget> {
                   ],
                 ),
                 Center(child: Text("2021 \u00a9 Attavut Channhu")),
+                (msg != null) ? Text(msg) : Container()
               ],
             ),
           ),
