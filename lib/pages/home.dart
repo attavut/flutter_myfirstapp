@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myfirstapp/pages/photo.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _HomePageState extends State<StatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('My First App'),
+          title: Text(''),
         ),
         body: Container(
           // child: Column(
@@ -57,6 +58,12 @@ class _HomePageState extends State<StatefulWidget> {
                         print('This is Login button');
                         msg = _usernameController.text;
                         setState(() {});
+
+                        Navigator.pushNamed(context, '/photo-page');
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => PhotoPage()));
                       },
                     ),
                     RaisedButton(
