@@ -9,6 +9,8 @@ class PhotoPage extends StatefulWidget {
 }
 
 class _PhotoPageState extends State<StatefulWidget> {
+  List<String> list = ['xxx', 'yyy', 'zzz'];
+
   @override
   Widget build(BuildContext context) {
     String args = ModalRoute.of(context).settings.arguments;
@@ -17,7 +19,17 @@ class _PhotoPageState extends State<StatefulWidget> {
       appBar: AppBar(
         title: Text('Photo show'),
       ),
-      body: Text(args),
+      body: Column(
+        // children: list.map((ele) {
+        //   if (ele != 'yyy')
+        //     return Text(ele);
+        //   else
+        //     return Container();
+        // }).toList(),
+        children: list.where((ele) => ele != 'yyy').map((ele) {
+          return Text(ele);
+        }).toList(),
+      ),
     );
   }
 }
