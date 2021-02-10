@@ -59,11 +59,8 @@ class _HomePageState extends State<StatefulWidget> {
                         msg = _usernameController.text;
                         setState(() {});
 
-                        Navigator.pushNamed(context, '/photo-page');
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => PhotoPage()));
+                        Navigator.pushNamed(context, '/photo-page',
+                            arguments: _usernameController.text);
                       },
                     ),
                     RaisedButton(
