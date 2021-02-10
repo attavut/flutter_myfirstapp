@@ -1,7 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _HomePageState();
+  }
+}
+
+class _HomePageState extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
